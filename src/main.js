@@ -250,6 +250,7 @@ function switchView(viewToShow) {
   viewToShow.style.display = 'block';  
 }
 
+// Function to use createposter function to make unmotivational posters display
 function cleanData() {
   return unmotivationalPosters.map(poster => {
     return createPoster(poster.img_url, poster.name, poster.description);
@@ -258,9 +259,9 @@ function cleanData() {
 
 function displayUnmotivationalPosters() {
   const unmotivationalPostersGrid = document.querySelector('.unmotivational-posters-grid');
-  unmotivationalPostersGrid.innerHTML = ''; // Clear any existing posters
+  unmotivationalPostersGrid.innerHTML = ''; 
 
-  const posters = cleanData(); // Get the clean poster data
+  const posters = cleanData(); 
   posters.forEach(poster => {
     const unmotivationalPosterElement = document.createElement('div');
     unmotivationalPosterElement.classList.add('unmotivational-poster-item');
@@ -321,7 +322,7 @@ savePosterButton.addEventListener('click', () => {
   savedPosterElement.innerHTML = `
     <div class="mini-poster">
       <img src="${poster.imageURL}" alt="Saved Poster">
-      <h3>${poster.title}</h3>
+      <h2>${poster.title}</h2>
       <p>${poster.quote}</p>
     </div>
   `;
