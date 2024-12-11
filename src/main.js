@@ -265,14 +265,14 @@ function displayUnmotivationalPosters() {
   const posters = cleanData(); 
   posters.forEach(poster => {
     const miniPoster = document.createElement('div');
-    miniPoster.classList.add('mini-poster');
+    miniPoster.classList.add('mini-posters-unmotivational');
     miniPoster.innerHTML = `
       <img src="${poster.imageURL}" alt="${poster.title}">
       <h3>${poster.title}</h3>
       <p>${poster.quote}</p>
     `;
     miniPoster.addEventListener('dblclick', () => deleteUnmotivationalPoster(poster.imageURL));
-    
+
     unmotivationalPostersGrid.appendChild(miniPoster);
   });
 }
@@ -339,9 +339,7 @@ savePosterButton.addEventListener('click', () => {
     </div>
   `;
   savedPostersGrid.appendChild(savedPosterElement);
-  } else {
-    console.log('Poster already saved, no duplicates allowed');
-  }
+  } 
 });
 
 // shwichesview to the savedposter page whan button is claicked

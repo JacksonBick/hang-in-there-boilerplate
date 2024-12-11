@@ -144,3 +144,62 @@ button:hover {
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+/* ~~~~~ BUTTON STYLING ~~~~~ */
+
+
+
+/* ~~~~~ UNMOTIVATIONAL POSTERS LAYOUT ~~~~~ */
+.unmotivational-posters-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  flex: 1;
+}
+
+.mini-posters-unmotivational {
+  background: grey;
+  color: black;
+  margin: 10px;
+  height: auto;              
+  width: auto;           
+  padding: 25px;
+  box-sizing: border-box;    
+  text-align: left;          
+}
+
+.mini-posters-unmotivational img {
+  height: 200px;
+  width: 300px;
+}
+
+.mini-poster h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.mini-poster p {
+  font-size: 16px;           
+}
+
+@media (max-width: 1024px) {
+  .mini-posters-unmotivational {
+    width: calc(50% - 20px);  
+  }
+}
+
+@media (max-width: 768px) {
+  .mini-posters-unmotivational {
+    width: calc(100% - 20px); 
+  }
+}
+
+button {
+  font-size: 20px;       
+  padding: 10px 20px;    
+  background: black;     
+  border: none;          
+  border-radius: 10px;   
+  color: white;          
+}
