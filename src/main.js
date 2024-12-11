@@ -18,8 +18,8 @@ const unmotivationalPostersSection = document.querySelector('.unmotivational-pos
 const UnmotivationalButton = document.querySelector('.show-unmotivational');
 const backToMainUnmotivational = document.querySelector('.back-to-main');
 const showUnmotivationalButton = document.querySelector('.show-unmotivational');
-let savedPosters = [];
-let currentPoster = null;  
+var savedPosters = [];
+var currentPoster = null;  
 
 // Arrays of image URLs, titles, and quotes
 var images = [
@@ -207,12 +207,12 @@ let unmotivationalPosters = [
 
 // Functions go here 👇
 
-// Random index generator function
+// Random index generator function (given)
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-// Function to create a poster
+// Function to create a poster (given)
 function createPoster(imageURL, title, quote) {
   return {
     id: Date.now(), 
@@ -222,14 +222,14 @@ function createPoster(imageURL, title, quote) {
   };
 }
 
-// Function to display a poster
+// Function to display a poster (given)
 function displayPoster(poster) {
   posterImage.src = poster.imageURL;  
   posterTitle.textContent = poster.title;  
   posterQuote.textContent = poster.quote; 
 }
 
-// Function to display a random poster
+// Function to display a random poster (uses getRandomIndex function to get a random index in each array then uses createPoster function to put the indexs together to ake a random poster then uses the display poster to put the poster on the DOM)
 function displayRandomPoster() {
   const randomImageIndex = getRandomIndex(images);
   const randomTitleIndex = getRandomIndex(titles);
@@ -240,66 +240,78 @@ function displayRandomPoster() {
   displayPoster(randomPoster);
 }
 
-// Function to switch views between different sections
-function switchView(viewToShow) {
-  const sections = [mainPosterSection, formSection, savedPostersSection, unmotivationalPostersSection];
+// Function to switch views between different section by taking the page to the css file and usinf none as the syle.display will hide it until whatever sections is called and then it will use black to take up the page fully
+function switchView(viewedPage) {
+  var sections = [mainPosterSection, formSection, savedPostersSection, unmotivationalPostersSection];
   sections.forEach(section => {
     section.style.display = 'none'; 
   });
 
-  viewToShow.style.display = 'block';  
+  viewedPage.style.display = 'block';  
 }
 
-// Function to use createposter function to make unmotivational posters display
+// Function that takes the array of unmotivation posters and uses the createposters function to make an array of poster objects)
 function cleanData() {
   return unmotivationalPosters.map(poster => {
     return createPoster(poster.img_url, poster.name, poster.description);
   });
 }
 
+// selects .unmotivational-posters-grid from html and clears it with the inner html then calls cleandata to have the array of umotivational posters the uses the crateElement function to make a bunch of divs for each poster, then uses miniposter from css to make the format of the posters in the miniposter format and then uses appendchild to add the miniposter div to the innerhtml
 function displayUnmotivationalPosters() {
   const unmotivationalPostersGrid = document.querySelector('.unmotivational-posters-grid');
   unmotivationalPostersGrid.innerHTML = ''; 
 
   const posters = cleanData(); 
   posters.forEach(poster => {
-    const unmotivationalPosterElement = document.createElement('div');
-    unmotivationalPosterElement.classList.add('unmotivational-poster-item');
-    unmotivationalPosterElement.innerHTML = `
-      <div class="mini-poster">
-        <img src="${poster.imageURL}" alt="${poster.title}">
-        <h3>${poster.title}</h3>
-        <p>${poster.quote}</p>
-      </div>
+    const miniPoster = document.createElement('div');
+    miniPoster.classList.add('mini-poster');
+    miniPoster.innerHTML = `
+      <img src="${poster.imageURL}" alt="${poster.title}">
+      <h3>${poster.title}</h3>
+      <p>${poster.quote}</p>
     `;
-    unmotivationalPostersGrid.appendChild(unmotivationalPosterElement);
+    miniPoster.addEventListener('dblclick', () => deleteUnmotivationalPoster(poster.imageURL));
+    
+    unmotivationalPostersGrid.appendChild(miniPoster);
   });
 }
 
-// Event listeners for buttons
+function deleteUnmotivationalPoster(posterId) {
+  unmotivationalPosters = unmotivationalPosters.filter(poster => poster.img_url !== posterId);
+  displayUnmotivationalPosters();
+}
+
+// when the page loads displayrandomposter is called with the switchview function that is ste the the mainposter page
 window.addEventListener('load', () => {
   displayRandomPoster();
   switchView(mainPosterSection);
 });
 
-showRandomButton.addEventListener('click', displayRandomPoster);  // Show another random poster
+// call the displayrandomposter when button clicked
+showRandomButton.addEventListener('click', displayRandomPoster);
 
+// switches view to the form page
 makeOwnPosterButton.addEventListener('click', () => {
   switchView(formSection);  
 });
 
+// switchview to saved posterpage when button clicked
 showSavedPostersButton.addEventListener('click', () => {
   switchView(savedPostersSection);  
 });
 
+// switchview to mainpostersection when button clicked
 backToMainButton.addEventListener('click', () => {
   switchView(mainPosterSection);  
 });
 
+// switchview to mainpostersection when button clicked
 showMainButton.addEventListener('click', () => {
   switchView(mainPosterSection);  
 });
 
+// makes two varibales one for new posters and already saved posters and uses .some to see if the already saved poster matches another poster already in the array and if it doesnt it pushes that poster into the array 
 savePosterButton.addEventListener('click', () => {
   const poster = {
     imageURL: posterImage.src,
@@ -332,6 +344,7 @@ savePosterButton.addEventListener('click', () => {
   }
 });
 
+// shwichesview to the savedposter page whan button is claicked
 showSavedPostersButton.addEventListener('click', () => {
   switchView(savedPostersSection);  
 });
@@ -359,7 +372,7 @@ showUnmotivationalButton.addEventListener('click', () => {
   switchView(unmotivationalPostersSection);  
 });
 
-// Back to Main from Unmotivational Posters Section
+// switchesview to mainposter page when button is clicked
 backToMainUnmotivational.addEventListener('click', () => {
   switchView(mainPosterSection);
 });
