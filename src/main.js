@@ -7,6 +7,7 @@ const showRandomButton = document.querySelector('.show-random');
 const makeOwnPosterButton = document.querySelector('.show-form');
 const showSavedPostersButton = document.querySelector('.show-saved');
 const backToMainButton = document.querySelector('.back-to-main');
+const ToMainButtonUnmotivational = document.querySelector('.to-main-unmotivational');
 const savePosterButton = document.querySelector('.save-poster');
 const showMainButton = document.querySelector('.show-main');
 const mainPosterSection = document.querySelector('.main-poster');
@@ -306,6 +307,11 @@ backToMainButton.addEventListener('click', () => {
   switchView(mainPosterSection);  
 });
 
+// switchesview to mainposter page when button is clicked
+ToMainButtonUnmotivational.addEventListener('click', () => {
+  switchView(mainPosterSection);
+});
+
 // switchview to mainpostersection when button clicked
 showMainButton.addEventListener('click', () => {
   switchView(mainPosterSection);  
@@ -370,8 +376,5 @@ showUnmotivationalButton.addEventListener('click', () => {
   switchView(unmotivationalPostersSection);  
 });
 
-// switchesview to mainposter page when button is clicked
-backToMainUnmotivational.addEventListener('click', () => {
-  switchView(mainPosterSection);
-});
+
 
