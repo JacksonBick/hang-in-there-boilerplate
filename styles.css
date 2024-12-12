@@ -116,31 +116,105 @@ button:hover {
   padding: 20px;
 }
 
-.mini-poster {
+.first-mini-poster {
   background: black;
   color: white;
+  margin: 400px;
   height: 340px;
   padding: 25px;
   width: 425px;
+  box-sizing: border-box;    
+  text-align: left; 
+  flex-shrink: 0;         
 }
 
-.mini-poster img {
-  height:200px;
-  width: 300px;
+.first-mini-poster img {
+  height: 200px;
+  width: 100%;
 }
 
-.mini-poster h2,
-.mini-poster h4,
+.first-mini-poster h2,
+.firstmini-poster h4,
 .delete {
   color: white;
   line-height: 1;
   width: 90%;
 }
 
-.mini-poster h2 {
+.first-mini-poster h2 {
   font-size: 30px;
   font-weight: normal;
   letter-spacing: 5px;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+/* ~~~~~ BUTTON STYLING ~~~~~ */
+
+
+
+/* ~~~~~ UNMOTIVATIONAL POSTERS LAYOUT ~~~~~ */
+.unmotivational-posters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+.mini-posters-unmotivational {
+  background: grey;
+  color: black;
+  margin: 10px;
+  height: 340px;
+  padding: 25px;
+  width: 425px;
+  box-sizing: border-box;    
+  text-align: left; 
+  flex-shrink: 0;         
+}
+
+.mini-posters-unmotivational img {
+  height: 200px;
+  width: 100%;
+}
+
+.mini-poster h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.mini-poster p {
+  font-size: 16px;           
+}
+
+@media (max-width: 1024px) {
+  .unmotivational-posters-grid {
+    justify-content: center; 
+  }
+
+  .mini-posters-unmotivational {
+    width: 45%; 
+  }
+}
+
+@media (max-width: 768px) {
+  .unmotivational-posters-grid {
+    justify-content: center; 
+  }
+  .mini-posters-unmotivational {
+    width: 90%; 
+  }
+}
+
+button {
+  font-size: 20px;       
+  padding: 10px 20px;    
+  background: black;     
+  border: none;          
+  border-radius: 10px;   
+  color: white;          
 }
