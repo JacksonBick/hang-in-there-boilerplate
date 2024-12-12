@@ -338,7 +338,7 @@ savePosterButton.addEventListener('click', () => {
   const savedPosterElement = document.createElement('div');
   savedPosterElement.classList.add('saved-poster-item');  
   savedPosterElement.innerHTML = `
-    <div class="mini-poster">
+    <div class="first-mini-poster">
       <img src="${poster.imageURL}" alt="Saved Poster">
       <h2>${poster.title}</h2>
       <p>${poster.quote}</p>

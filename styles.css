@@ -116,10 +116,10 @@ button:hover {
   padding: 20px;
 }
 
-.mini-poster {
+.first-mini-poster {
   background: black;
   color: white;
-  margin: 10px;
+  margin: 400px;
   height: 340px;
   padding: 25px;
   width: 425px;
@@ -128,20 +128,20 @@ button:hover {
   flex-shrink: 0;         
 }
 
-.mini-poster img {
+.first-mini-poster img {
   height: 200px;
-  width: 300px;
+  width: 100%;
 }
 
-.mini-poster h2,
-.mini-poster h4,
+.first-mini-poster h2,
+.firstmini-poster h4,
 .delete {
   color: white;
   line-height: 1;
   width: 90%;
 }
 
-.mini-poster h2 {
+.first-mini-poster h2 {
   font-size: 30px;
   font-weight: normal;
   letter-spacing: 5px;
@@ -192,24 +192,19 @@ button:hover {
 }
 
 @media (max-width: 1024px) {
-  .saved-posters-grid,
   .unmotivational-posters-grid {
     justify-content: center; 
   }
 
-  .mini-poster,
   .mini-posters-unmotivational {
     width: 45%; 
   }
 }
 
 @media (max-width: 768px) {
-  .saved-posters-grid,
   .unmotivational-posters-grid {
     justify-content: center; 
   }
-
-  .mini-poster,
   .mini-posters-unmotivational {
     width: 90%; 
   }
