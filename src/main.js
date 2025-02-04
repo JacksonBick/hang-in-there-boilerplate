@@ -1,5 +1,7 @@
 // query selector variables go here 👇
-
+const posterImage = document.querySelector('.poster-img')
+const posterTitle = document.querySelector('.poster-title')
+const posterQuote = document.querySelector('.poster-quote')
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -103,6 +105,12 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
+document.querySelector('.show-random').addEventListener('click', displayRandomPoster);
+
+window.onload = function() {
+  displayRandomPoster();
+}
+
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
