@@ -118,3 +118,18 @@ function createPoster(imageURL, title, quote) {
     quote: quote}
 }
 
+function displayPoster(poster) {
+  posterImage.src = poster.imageURL;  
+  posterTitle.textContent = poster.title;  
+  posterQuote.textContent = poster.quote; 
+}
+
+function displayRandomPoster() {
+  const randomImageIndex = getRandomIndex(images);
+  const randomTitleIndex = getRandomIndex(titles);
+  const randomQuoteIndex = getRandomIndex(quotes);
+
+  const randomPoster = createPoster(images[randomImageIndex], titles[randomTitleIndex], quotes[randomQuoteIndex]);
+
+  displayPoster(randomPoster);
+}
