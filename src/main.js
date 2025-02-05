@@ -2,6 +2,14 @@
 const posterImage = document.querySelector('.poster-img')
 const posterTitle = document.querySelector('.poster-title')
 const posterQuote = document.querySelector('.poster-quote')
+const showRandomButton = document.querySelector('.show-random')
+const makeOwnPosterButton = document.querySelector('.show-form')
+const formSection = document.querySelector('.poster-form')
+const mainPosterSection = document.querySelector('.main-poster')
+const savedPostersSection = document.querySelector('.saved-posters')
+const showSavedPostersButton = document.querySelector('.show-saved')
+const backToMainButton = document.querySelector('.back-to-main')
+const showMainButton = document.querySelector('.show-main')
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -105,12 +113,32 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-document.querySelector('.show-random').addEventListener('click', displayRandomPoster);
+showRandomButton.addEventListener('click', displayRandomPoster);
 
 window.onload = function() {
   displayRandomPoster();
 }
 
+window.addEventListener('load', () => {
+  displayRandomPoster();
+  switchView(mainPosterSection);
+})
+
+makeOwnPosterButton.addEventListener('click', () => {
+  switchView(formSection);  
+})
+
+showSavedPostersButton.addEventListener('click', () => {
+  switchView(savedPostersSection);  
+})
+
+showMainButton.addEventListener('click', () => {
+  switchView(mainPosterSection);  
+});
+
+backToMainButton.addEventListener('click', () => {
+  switchView(mainPosterSection);  
+});
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -140,4 +168,13 @@ function displayRandomPoster() {
   const randomPoster = createPoster(images[randomImageIndex], titles[randomTitleIndex], quotes[randomQuoteIndex]);
 
   displayPoster(randomPoster);
+}
+
+function switchView(viewedPage) {
+  var sections = [mainPosterSection, formSection, savedPostersSection]
+  sections.forEach(section => {
+    section.style.display = 'none'; 
+  });
+
+  viewedPage.style.display = 'block';  
 }
