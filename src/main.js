@@ -7,7 +7,9 @@ const makeOwnPosterButton = document.querySelector('.show-form')
 const formSection = document.querySelector('.poster-form')
 const mainPosterSection = document.querySelector('.main-poster')
 const savedPostersSection = document.querySelector('.saved-posters')
-const showSavedPostersButton = document.querySelector('.show-saved');
+const showSavedPostersButton = document.querySelector('.show-saved')
+const backToMainButton = document.querySelector('.back-to-main')
+const showMainButton = document.querySelector('.show-main')
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -129,6 +131,14 @@ makeOwnPosterButton.addEventListener('click', () => {
 showSavedPostersButton.addEventListener('click', () => {
   switchView(savedPostersSection);  
 })
+
+showMainButton.addEventListener('click', () => {
+  switchView(mainPosterSection);  
+});
+
+backToMainButton.addEventListener('click', () => {
+  switchView(mainPosterSection);  
+});
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
