@@ -10,6 +10,7 @@ const savedPostersSection = document.querySelector('.saved-posters')
 const showSavedPostersButton = document.querySelector('.show-saved')
 const backToMainButton = document.querySelector('.back-to-main')
 const showMainButton = document.querySelector('.show-main')
+const makePosterButton = document.querySelector('.make-poster')
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -109,41 +110,59 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-var savedPosters = [];
-var currentPoster;
+var savedPosters = []
+var currentPoster
 
 // event listeners go here 👇
-showRandomButton.addEventListener('click', displayRandomPoster);
+showRandomButton.addEventListener('click', displayRandomPoster)
 
 window.onload = function() {
-  displayRandomPoster();
+  displayRandomPoster()
 }
 
 window.addEventListener('load', () => {
-  displayRandomPoster();
-  switchView(mainPosterSection);
+  displayRandomPoster()
+  switchView(mainPosterSection)
 })
 
 makeOwnPosterButton.addEventListener('click', () => {
-  switchView(formSection);  
+  switchView(formSection)
 })
 
 showSavedPostersButton.addEventListener('click', () => {
-  switchView(savedPostersSection);  
+  switchView(savedPostersSection)
 })
 
 showMainButton.addEventListener('click', () => {
-  switchView(mainPosterSection);  
+  switchView(mainPosterSection)
 });
 
 backToMainButton.addEventListener('click', () => {
-  switchView(mainPosterSection);  
+  switchView(mainPosterSection)
 });
 
+makePosterButton.addEventListener('click', (event) => {
+  event.preventDefault()
+
+  const imageUrl = document.querySelector('#poster-image-url').value
+  const title = document.querySelector('#poster-title').value
+  const quote = document.querySelector('#poster-quote').value
+
+  const newPoster = createPoster(imageUrl, title, quote)
+
+  currentPoster = newPoster
+
+  images.push(imageUrl)
+  titles.push(title)
+  quotes.push(quote)
+
+  switchView(mainPosterSection)
+  displayPoster(newPoster)
+});
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+  return Math.floor(Math.random() * array.length)
 }
 
 function createPoster(imageURL, title, quote) {
@@ -155,26 +174,26 @@ function createPoster(imageURL, title, quote) {
 }
 
 function displayPoster(poster) {
-  posterImage.src = poster.imageURL;  
-  posterTitle.textContent = poster.title;  
-  posterQuote.textContent = poster.quote; 
+  posterImage.src = poster.imageURL
+  posterTitle.textContent = poster.title
+  posterQuote.textContent = poster.quote
 }
 
 function displayRandomPoster() {
-  const randomImageIndex = getRandomIndex(images);
-  const randomTitleIndex = getRandomIndex(titles);
-  const randomQuoteIndex = getRandomIndex(quotes);
+  const randomImageIndex = getRandomIndex(images)
+  const randomTitleIndex = getRandomIndex(titles)
+  const randomQuoteIndex = getRandomIndex(quotes)
 
-  const randomPoster = createPoster(images[randomImageIndex], titles[randomTitleIndex], quotes[randomQuoteIndex]);
+  const randomPoster = createPoster(images[randomImageIndex], titles[randomTitleIndex], quotes[randomQuoteIndex])
 
-  displayPoster(randomPoster);
+  displayPoster(randomPoster)
 }
 
 function switchView(viewedPage) {
   var sections = [mainPosterSection, formSection, savedPostersSection]
   sections.forEach(section => {
-    section.style.display = 'none'; 
+    section.style.display = 'none'
   });
 
-  viewedPage.style.display = 'block';  
+  viewedPage.style.display = 'block'
 }
