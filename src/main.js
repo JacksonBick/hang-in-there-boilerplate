@@ -11,6 +11,8 @@ const showSavedPostersButton = document.querySelector('.show-saved')
 const backToMainButton = document.querySelector('.back-to-main')
 const showMainButton = document.querySelector('.show-main')
 const makePosterButton = document.querySelector('.make-poster')
+const savePosterButton = document.querySelector('.save-poster')
+const savedPostersGrid = document.querySelector('.saved-posters-grid')
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -111,7 +113,7 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = []
-var currentPoster
+var currentPoster = null
 
 // event listeners go here 👇
 showRandomButton.addEventListener('click', displayRandomPoster)
@@ -135,30 +137,17 @@ showSavedPostersButton.addEventListener('click', () => {
 
 showMainButton.addEventListener('click', () => {
   switchView(mainPosterSection)
-});
+})
 
 backToMainButton.addEventListener('click', () => {
   switchView(mainPosterSection)
-});
+})
 
-makePosterButton.addEventListener('click', (event) => {
-  event.preventDefault()
+makePosterButton.addEventListener('click', makePoster)
+  
+savePosterButton.addEventListener('click', savePoster)
 
-  const imageUrl = document.querySelector('#poster-image-url').value
-  const title = document.querySelector('#poster-title').value
-  const quote = document.querySelector('#poster-quote').value
-
-  const newPoster = createPoster(imageUrl, title, quote)
-
-  currentPoster = newPoster
-
-  images.push(imageUrl)
-  titles.push(title)
-  quotes.push(quote)
-
-  switchView(mainPosterSection)
-  displayPoster(newPoster)
-});
+showSavedPostersButton.addEventListener('click', showSavedPosters)
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -177,6 +166,8 @@ function displayPoster(poster) {
   posterImage.src = poster.imageURL
   posterTitle.textContent = poster.title
   posterQuote.textContent = poster.quote
+
+  currentPoster = poster
 }
 
 function displayRandomPoster() {
@@ -196,4 +187,51 @@ function switchView(viewedPage) {
   });
 
   viewedPage.style.display = 'block'
+}
+
+function makePoster(event) {
+  event.preventDefault()
+
+  const imageUrl = document.querySelector('#poster-image-url').value
+  const title = document.querySelector('#poster-title').value
+  const quote = document.querySelector('#poster-quote').value
+
+  const newPoster = createPoster(imageUrl, title, quote)
+
+  currentPoster = newPoster
+
+  images.push(imageUrl)
+  titles.push(title)
+  quotes.push(quote)
+
+  switchView(mainPosterSection)
+  displayPoster(newPoster)
+}
+
+function savePoster() {
+  if (currentPoster && !savedPosters.some(poster => poster.id === currentPoster.id)) {
+    savedPosters.push(currentPoster);
+  }
+}
+
+function showSavedPosters() {
+  switchView(savedPostersSection)
+
+  savedPostersGrid.innerHTML = '';
+
+  savedPosters.forEach(function(poster) {
+    savedPostersGrid.innerHTML += `
+      <div class="mini-poster">
+        <img src="${poster.imageURL}" alt="${poster.title}">
+        <h2>${poster.title}</h2>
+        <h4>"${poster.quote}"</h4>
+        <button class="delete" onclick="deletePoster(${poster.id})">Delete</button>
+      </div>
+    `;
+  })
+}
+
+function deletePoster(id) {
+  savedPosters = savedPosters.filter(poster => poster.id !== id);
+  showSavedPosters()
 }
