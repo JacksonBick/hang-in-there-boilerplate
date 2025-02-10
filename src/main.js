@@ -386,7 +386,7 @@ function showUnmotivationalPosters() {
 
   cleanedPosters.forEach(poster => {
     const posterDiv = document.createElement('div');
-    posterDiv.classList.add('mini-poster');
+    posterDiv.classList.add('mini-poster-unmotivational');
     posterDiv.innerHTML = `
     <img src="${poster.image_url}" alt="${poster.title}">
     <h3>${poster.title}</h3>
