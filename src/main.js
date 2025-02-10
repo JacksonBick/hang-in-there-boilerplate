@@ -285,6 +285,10 @@ backToMainButtonUnmotivational.addEventListener('click', () => {
   switchView(mainPosterSection)
 })
 
+// unmotivationalPostersGrid.addEventListener('dblclick', () => {
+//   deleteUnmotivationalPoster(poster.image_url)
+// })
+
 
 
 // functions and event handlers go here 👇
@@ -293,16 +297,16 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
 
-function createPoster(imageURL, title, quote) {
+function createPoster(image_url, title, quote) {
   return {
     id: Date.now(), 
-    imageURL: imageURL, 
+    image_url: image_url, 
     title: title, 
     quote: quote}
 }
 
 function displayPoster(poster) {
-  posterImage.src = poster.imageURL
+  posterImage.src = poster.image_url
   posterTitle.textContent = poster.title
   posterQuote.textContent = poster.quote
 
@@ -331,15 +335,15 @@ function switchView(viewedPage) {
 function makePoster(event) {
   event.preventDefault()
 
-  const imageUrl = document.querySelector('#poster-image-url').value
+  const image_url = document.querySelector('#poster-image-url').value
   const title = document.querySelector('#poster-title').value
   const quote = document.querySelector('#poster-quote').value
 
-  const newPoster = createPoster(imageUrl, title, quote)
+  const newPoster = createPoster(image_url, title, quote)
 
   currentPoster = newPoster
 
-  images.push(imageUrl)
+  images.push(image_url)
   titles.push(title)
   quotes.push(quote)
 
@@ -361,7 +365,7 @@ function showSavedPosters() {
   savedPosters.forEach(function(poster) {
     savedPostersGrid.innerHTML += `
       <div class="mini-poster">
-        <img src="${poster.imageURL}" alt="${poster.title}">
+        <img src="${poster.image_url}" alt="${poster.title}">
         <h2>${poster.title}</h2>
         <h4>"${poster.quote}"</h4>
       </div>
@@ -381,12 +385,23 @@ function showUnmotivationalPosters() {
   unmotivationalPostersGrid.innerHTML = ''
 
   cleanedPosters.forEach(poster => {
-    unmotivationalPostersGrid.innerHTML += `
-      <div class="mini-poster">
-        <img src="${poster.imageURL}" alt="${poster.title}">
-        <h2>${poster.title}</h2>
-        <h4>"${poster.quote}"</h4>
-      </div>
-    `;
+    const posterDiv = document.createElement('div');
+    posterDiv.classList.add('mini-poster');
+    posterDiv.innerHTML = `
+    <img src="${poster.image_url}" alt="${poster.title}">
+    <h3>${poster.title}</h3>
+    <p>${poster.quote}</p>
+  `
+  posterDiv.addEventListener('dblclick', () => {
+    deleteUnmotivationalPoster(poster.image_url); 
   });
+
+    unmotivationalPostersGrid.appendChild(posterDiv);
+  });
+}
+
+function deleteUnmotivationalPoster(posterImg_url) {
+  unmotivationalPosters = unmotivationalPosters.filter(poster => poster.img_url !== posterImg_url);
+
+  showUnmotivationalPosters();
 }
