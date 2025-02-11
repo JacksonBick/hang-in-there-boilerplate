@@ -6,6 +6,9 @@ const showRandomButton = document.querySelector('.show-random')
 const makeOwnPosterButton = document.querySelector('.show-form')
 const formSection = document.querySelector('.poster-form')
 const mainPosterSection = document.querySelector('.main-poster')
+const image_url = document.querySelector('#poster-image-url')
+const title = document.querySelector('#poster-title')
+const quote = document.querySelector('#poster-quote')
 const savedPostersSection = document.querySelector('.saved-posters')
 const showSavedPostersButton = document.querySelector('.show-saved')
 const backToMainButton = document.querySelector('.back-to-main')
@@ -17,6 +20,7 @@ const showUnmotivationalButton = document.querySelector('.show-unmotivational')
 const backToMainButtonUnmotivational = document.querySelector('.back-to-main-unmotivational')
 const unmotivationalPostersSection = document.querySelector('.unmotivational-posters')
 const unmotivationalPostersGrid = document.querySelector('.unmotivational-posters-grid')
+
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
 var images = [
@@ -335,11 +339,11 @@ function switchView(viewedPage) {
 function makePoster(event) {
   event.preventDefault()
 
-  const image_url = document.querySelector('#poster-image-url').value
-  const title = document.querySelector('#poster-title').value
-  const quote = document.querySelector('#poster-quote').value
+  const imgValue = image_url.value
+  const titleValue = title.value
+  const quoteValue = quote.value
 
-  const newPoster = createPoster(image_url, title, quote)
+  const newPoster = createPoster(imgValue, titleValue, quoteValue)
 
   currentPoster = newPoster
 
