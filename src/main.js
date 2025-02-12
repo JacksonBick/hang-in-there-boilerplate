@@ -357,7 +357,7 @@ function makePoster(event) {
 
 function savePoster() {
   if (currentPoster && !savedPosters.some(poster => poster.id === currentPoster.id)) {
-    savedPosters.push(currentPoster);
+    savedPosters.push(currentPoster)
   }
 }
 
@@ -379,7 +379,7 @@ function showSavedPosters() {
 
 function cleanData() {
   return unmotivationalPosters.map(poster => {
-    return createPoster(poster.img_url, poster.name, poster.description);
+    return createPoster(poster.img_url, poster.name, poster.description)
   })
 }
 
@@ -397,15 +397,15 @@ function showUnmotivationalPosters() {
     <p>${poster.quote}</p>
   `
   posterDiv.addEventListener('dblclick', () => {
-    deleteUnmotivationalPoster(poster.image_url); 
-  });
+    deleteUnmotivationalPoster(poster.image_url)
+  })
 
     unmotivationalPostersGrid.appendChild(posterDiv);
-  });
+  })
 }
 
 function deleteUnmotivationalPoster(posterImg_url) {
-  unmotivationalPosters = unmotivationalPosters.filter(poster => poster.img_url !== posterImg_url);
+  unmotivationalPosters = unmotivationalPosters.filter(poster => poster.img_url !== posterImg_url)
 
-  showUnmotivationalPosters();
+  showUnmotivationalPosters()
 }
