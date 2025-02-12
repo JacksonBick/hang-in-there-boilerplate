@@ -250,7 +250,7 @@ var currentPoster = null
 // event listeners go here 👇
 showRandomButton.addEventListener('click', displayRandomPoster)
 
-
+// when the page first loads call displayrandomposter on the mainposterseaction
 window.addEventListener('load', () => {
   displayRandomPoster()
   switchView(mainPosterSection)
@@ -273,10 +273,6 @@ backToMainButton.addEventListener('click', () => {
   switchView(mainPosterSection)
 })
 
-makePosterButton.addEventListener('click', makePoster)
-  
-savePosterButton.addEventListener('click', savePoster)
-
 showUnmotivationalButton.addEventListener('click', () => {
   switchView(unmotivationalPostersSection)
   showUnmotivationalPosters()
@@ -285,6 +281,10 @@ showUnmotivationalButton.addEventListener('click', () => {
 backToMainButtonUnmotivational.addEventListener('click', () => {
   switchView(mainPosterSection)
 })
+
+makePosterButton.addEventListener('click', makePoster)
+  
+savePosterButton.addEventListener('click', savePoster)
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -300,6 +300,7 @@ function createPoster(image_url, title, quote) {
     quote: quote}
 }
 
+// used in the display random poster. gets the different parts of the poster to be able to build the poster using the selected html
 function displayPoster(poster) {
   posterImage.src = poster.image_url
   posterTitle.textContent = poster.title
@@ -308,6 +309,7 @@ function displayPoster(poster) {
   currentPoster = poster
 }
 
+// gets the random index of each of the poster arrays and then uses the createposter method to put those elements togethoer to build the poster and then uses the displayposter fuction to put that random poster on the DOM
 function displayRandomPoster() {
   const randomImageIndex = getRandomIndex(images)
   const randomTitleIndex = getRandomIndex(titles)
@@ -318,6 +320,7 @@ function displayRandomPoster() {
   displayPoster(randomPoster)
 }
 
+// makes an array of the different html sections and then iterates over them by hiding all of them with none, and then uses the argument to call the section to the DOM with block
 function switchView(viewedPage) {
   var sections = [mainPosterSection, formSection, savedPostersSection, unmotivationalPostersSection]
   sections.forEach(section => {
@@ -327,8 +330,9 @@ function switchView(viewedPage) {
   viewedPage.style.display = 'block'
 }
 
+// gets the submission tags from the html and uses the create poster with whatver is in those blanks and makes the currentposter of the Dom the elements of what was in the submisson and then pushes those to the poster arrays
 function makePoster(event) {
-  event.preventDefault()
+  event.preventDefault() // stops page from reloading same submission page
 
   const imgValue = image_url.value
   const titleValue = title.value
@@ -353,6 +357,7 @@ function savePoster() {
   }
 }
 
+// adds new div when the saveposters button is clicked and whatever the current posters elemts are are saved to the new div
 function showSavedPosters() {
   switchView(savedPostersSection)
 
@@ -370,12 +375,14 @@ function showSavedPosters() {
   })
 }
 
+// takes the new array of unmaotivational poster objects and converts them to work with the create poster function
 function cleanData() {
   return unmotivationalPosters.map(poster => {
     return createPoster(poster.img_url, poster.name, poster.description)
   })
 }
 
+// takes the converted unmotivational posters array and makes them each into there own min poster div and then adds an eventlisnetr that pulls from the delete unmotivational poster function to dbl clik the poster to delete
 function showUnmotivationalPosters() {
   const cleanedPosters = cleanData()
 
@@ -397,6 +404,7 @@ function showUnmotivationalPosters() {
   })
 }
 
+// if poster clicked on matches url of poster clicked on deletes poster from the array
 function deleteUnmotivationalPoster(posterImg_url) {
   unmotivationalPosters = unmotivationalPosters.filter(poster => poster.img_url !== posterImg_url)
 
