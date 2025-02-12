@@ -286,12 +286,6 @@ backToMainButtonUnmotivational.addEventListener('click', () => {
   switchView(mainPosterSection)
 })
 
-// unmotivationalPostersGrid.addEventListener('dblclick', () => {
-//   deleteUnmotivationalPoster(poster.image_url)
-// })
-
-
-
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
