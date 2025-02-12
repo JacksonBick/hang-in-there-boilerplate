@@ -108,9 +108,10 @@ button:hover {
 }
 
 .saved-posters-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
   padding: 20px;
 }
 

@@ -250,9 +250,6 @@ var currentPoster = null
 // event listeners go here 👇
 showRandomButton.addEventListener('click', displayRandomPoster)
 
-window.onload = function() {
-  displayRandomPoster()
-}
 
 window.addEventListener('load', () => {
   displayRandomPoster()
@@ -355,6 +352,7 @@ function makePoster(event) {
   displayPoster(newPoster)
 }
 
+// .some iterator checks each element in the array for the callback statement to see if they meet the call back function it stops when finding an element that matches the call back function
 function savePoster() {
   if (currentPoster && !savedPosters.some(poster => poster.id === currentPoster.id)) {
     savedPosters.push(currentPoster)
@@ -364,12 +362,13 @@ function savePoster() {
 function showSavedPosters() {
   switchView(savedPostersSection)
 
+  // clears grid 
   savedPostersGrid.innerHTML = '';
 
-  savedPosters.forEach(function(poster) {
+  savedPosters.forEach((poster) => {
     savedPostersGrid.innerHTML += `
       <div class="mini-poster">
-        <img src="${poster.image_url}" alt="${poster.title}">
+        <img src="${poster.image_url}">
         <h2>${poster.title}</h2>
         <h4>"${poster.quote}"</h4>
       </div>
@@ -388,11 +387,11 @@ function showUnmotivationalPosters() {
 
   unmotivationalPostersGrid.innerHTML = ''
 
-  cleanedPosters.forEach(poster => {
+  cleanedPosters.forEach((poster) => {
     const posterDiv = document.createElement('div');
     posterDiv.classList.add('mini-poster-unmotivational');
     posterDiv.innerHTML = `
-    <img src="${poster.image_url}" alt="${poster.title}">
+    <img src="${poster.image_url}">
     <h3>${poster.title}</h3>
     <p>${poster.quote}</p>
   `
