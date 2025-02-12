@@ -388,8 +388,8 @@ function showUnmotivationalPosters() {
   unmotivationalPostersGrid.innerHTML = ''
 
   cleanedPosters.forEach((poster) => {
-    const posterDiv = document.createElement('div');
-    posterDiv.classList.add('mini-poster-unmotivational');
+    const posterDiv = document.createElement('div')
+    posterDiv.classList.add('mini-poster-unmotivational')
     posterDiv.innerHTML = `
     <img src="${poster.image_url}">
     <h3>${poster.title}</h3>
@@ -399,7 +399,7 @@ function showUnmotivationalPosters() {
     deleteUnmotivationalPoster(poster.image_url)
   })
 
-    unmotivationalPostersGrid.appendChild(posterDiv);
+    unmotivationalPostersGrid.appendChild(posterDiv)
   })
 }
 
